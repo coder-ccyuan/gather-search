@@ -1,9 +1,10 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <a-button type="primary">Primary Button</a-button>
+  <a-button>Default Button</a-button>
+  <a-button type="dashed">Dashed Button</a-button>
+  <a-button type="text">Text Button</a-button>
+  <a-button type="link">Link Button</a-button>
+  <SchoolC></SchoolC>
 </template>
 
 <style>
@@ -14,17 +15,12 @@
   text-align: center;
   color: #2c3e50;
 }
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
+<script lang="js">
+import SchoolC from "@/views/SchoolC.vue";
+
+export default {
+  name: "App",
+  components: { SchoolC }
+};
+</script>
