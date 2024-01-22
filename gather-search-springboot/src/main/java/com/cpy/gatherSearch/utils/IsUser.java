@@ -1,9 +1,9 @@
 package com.cpy.gatherSearch.utils;
 
-
+import com.cpy.gatherSearch.Exception.CommonException;
+import com.cpy.gatherSearch.common.StatuesCode;
 import com.cpy.gatherSearch.constants.UserConstant;
 import com.cpy.gatherSearch.model.entity.User;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,16 +19,36 @@ public class IsUser {
      */
     public static boolean isAdmin(HttpServletRequest request){
 
-        HttpSession session = request.getSession();
-         User user=(User) session.getAttribute(UserConstant.USER_LOGIN_STATE);
-        if (user==null){
-            return false;
-        }
-        if(user.getRole()==UserConstant.ADMIN_ROLE){
+        User user = getLoginUser(request);
+        if(user!=null&&user.getUserRole().equals(UserConstant.ADMIN_ROLE)){
             return true;
         }
         return false;
     }
 
+    /**
+     * 判断是否登录
+     * @param request
+     * @return
+     */
+    public static User getLoginUser(HttpServletRequest request){
 
+        HttpSession session = request.getSession();
+        User user=(User) session.getAttribute(UserConstant.USER_LOGIN_STATE);
+        return user;
+    }
+
+    /**
+     * 只有用户自己和管理员才能更改工具类
+     * @param request
+     * @param userId 用户Id
+     * @return
+     */
+    public static boolean isLoginUserOrAdmin(HttpServletRequest request,Long userId){
+        if (IsUser.getLoginUser(request).getId()!=userId
+                &&!IsUser.isAdmin(request)){
+            return false;
+        }
+        return true;
+    }
 }

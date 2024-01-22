@@ -12,7 +12,7 @@ import java.util.List;
 @SpringBootTest
 class SpringbootPublicModelApplicationTests {
 @Resource
-    UserService userService;
+UserService userService;
     @Test
     void contextLoads() {
         QueryWrapper<User> qw = new QueryWrapper<>();

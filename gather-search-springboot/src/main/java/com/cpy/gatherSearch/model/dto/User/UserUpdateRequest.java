@@ -3,36 +3,67 @@ package com.cpy.gatherSearch.model.dto.User;
 import lombok.Data;
 
 import java.io.Serializable;
-
+import java.util.Date;
+/**
+ * 前端请求数据封装类
+ * 用户更新接口
+ */
 @Data
 public class UserUpdateRequest implements Serializable {
-    /**
-     * 用户id
-     */
-    private Integer id;
+    private Long id;
 
     /**
-     * 昵称
+     * 账号
      */
-    private String nickname;
+    private String userAccount;
 
     /**
-     * 手机号
+     * 密码
      */
-    private String phone;
+    private String userPassword;
 
     /**
-     * 邮箱
+     * 微信开放平台id
      */
-    private String email;
+    private String unionId;
 
     /**
-     *  性别，0为女，1为男
+     * 公众号openId
      */
-    private Integer gender;
+    private String mpOpenId;
 
     /**
-     *  权限，0为普通用户，1为管理员用户
+     * 用户昵称
      */
-    private Integer role;
+    private String userName;
+
+    /**
+     * 用户头像
+     */
+    private String userAvatar;
+
+    /**
+     * 用户简介
+     */
+    private String userProfile;
+
+    /**
+     * 用户角色：user/admin/ban
+     */
+    private String userRole;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+
+    /**
+     * 是否删除
+     */
+    private Integer isDelete;
 }

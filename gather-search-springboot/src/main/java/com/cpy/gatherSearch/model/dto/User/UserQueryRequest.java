@@ -4,6 +4,10 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * 前端请求数据封装类
+ * 用户删除接口
+ */
 @Data
 public class UserQueryRequest implements Serializable {
     /**
@@ -14,11 +18,11 @@ public class UserQueryRequest implements Serializable {
     /**
      * 用户名
      */
-    private String username;
+    private String userAccount;
 
     /**
      * 昵称
      */
-    private String nickname;
+    private String userName;
 
 }

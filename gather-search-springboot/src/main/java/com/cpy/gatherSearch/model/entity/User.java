@@ -1,63 +1,66 @@
 package com.cpy.gatherSearch.model.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
+ * 用户
  * @TableName user
  */
 @TableName(value ="user")
 @Data
 public class User implements Serializable {
     /**
-     * 用户id
+     * id
      */
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
-     * 用户名
+     * 账号
      */
-    private String username;
+    private String userAccount;
 
     /**
-     * 用户密码
+     * 密码
      */
-    private String password;
+    private String userPassword;
 
     /**
-     * 昵称
+     * 微信开放平台id
      */
-    private String nickname;
+    private String unionId;
 
     /**
-     * 手机号
+     * 公众号openId
      */
-    private String phone;
+    private String mpOpenId;
 
     /**
-     * 邮箱
+     * 用户昵称
      */
-    private String email;
+    private String userName;
 
     /**
-     *  性别，0为女，1为男
+     * 用户头像
      */
-    private Integer gender;
+    private String userAvatar;
 
     /**
-     *  权限，0为普通用户，1为管理员用户
+     * 用户简介
      */
-    private Integer role;
+    private String userProfile;
 
     /**
-     *  0为离线，1为上线
+     * 用户角色：user/admin/ban
      */
-    private Integer state;
+    private String userRole;
 
     /**
      * 创建时间
@@ -65,9 +68,13 @@ public class User implements Serializable {
     private Date createTime;
 
     /**
-     *  0表示未删除，1表示删除
+     * 更新时间
      */
-    @TableLogic(value = "0",delval = "1")
+    private Date updateTime;
+
+    /**
+     * 是否删除
+     */
     private Integer isDelete;
 
     @TableField(exist = false)

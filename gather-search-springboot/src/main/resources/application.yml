@@ -2,14 +2,21 @@ spring:
   session:
     #session??
     timeout: 86400
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher #解决高版本SpringBoot整合Swagger 启动报错Failed to start bean ‘documentationPluginsBootstrapper‘ 问题
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/cpy?rewriteBatchedStatements=true
+    url: jdbc:mysql://localhost:3306/gather_search?rewriteBatchedStatements=true
+  elasticsearch:
+    cluster-name: elasticsearch
+    cluster-nodes: http://localhost:9300
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: false #关闭驼峰自动转换
   global-config:
     db-config:
       logic-delete-field: isDelete # ????????????(since 3.3.0,????????????2)
@@ -17,3 +24,5 @@ mybatis-plus:
       logic-not-delete-value: 0 # ??????(??? 0)
 server:
   port: 8090
+  servlet:
+    context-path: /api

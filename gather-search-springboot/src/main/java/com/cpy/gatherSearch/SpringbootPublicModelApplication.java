@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-@MapperScan(" com.cpy.gatherSearch.mapper")
+@MapperScan("com.cpy.gatherSearch.dao.mapper")
 public class SpringbootPublicModelApplication {
 
     public static void main(String[] args) {
