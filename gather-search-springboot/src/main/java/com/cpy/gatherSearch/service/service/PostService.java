@@ -5,6 +5,7 @@ import com.cpy.gatherSearch.model.dto.post.PostAddRequest;
 import com.cpy.gatherSearch.model.dto.post.PostQueryRequest;
 import com.cpy.gatherSearch.model.dto.post.PostUpdateRequest;
 import com.cpy.gatherSearch.model.entity.Post;
+import com.cpy.gatherSearch.model.vo.post.PostVO;
 import javafx.geometry.Pos;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +25,8 @@ public interface PostService extends IService<Post> {
     boolean saveAndUpdatePostEs(Post post);
     boolean deletePostEs(Long id);
 
-    List<Post> getPostListByEs(PostQueryRequest queryRequest);
+    List<PostVO> getPostListByEs(PostQueryRequest queryRequest);
 
     boolean deletePost(Long id, HttpServletRequest request);
-    List<Post> getListByUserId(Long id);
+    List<PostVO> getListByUserId(Long id);
 }

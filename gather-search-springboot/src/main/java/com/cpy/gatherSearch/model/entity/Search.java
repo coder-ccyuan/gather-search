@@ -1,5 +1,6 @@
 package com.cpy.gatherSearch.model.entity;
 
+import com.cpy.gatherSearch.model.vo.post.PostVO;
 import javafx.geometry.Pos;
 import lombok.Data;
 
@@ -12,6 +13,6 @@ import java.util.List;
 @Data
 public class Search implements Serializable {
    private List<Picture> pictureList;
-   private List<Post> postList;
+   private List<PostVO> postList;
    private List<User> userList;
 }

@@ -92,6 +92,7 @@ const onFinish = values => {
     }else{
       console.log(res.description);
       message.error('登录失败',res.description)
+      alert('登录失败',res.description)
     }
   }).catch(err=>{
     console.log(err);

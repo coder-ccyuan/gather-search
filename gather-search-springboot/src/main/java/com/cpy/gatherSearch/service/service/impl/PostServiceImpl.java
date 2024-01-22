@@ -1,7 +1,5 @@
 package com.cpy.gatherSearch.service.service.impl;
 
-import java.util.Date;
-
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,6 +13,7 @@ import com.cpy.gatherSearch.model.dto.post.PostQueryRequest;
 import com.cpy.gatherSearch.model.dto.post.PostUpdateRequest;
 import com.cpy.gatherSearch.model.entity.Post;
 import com.cpy.gatherSearch.model.entity.User;
+import com.cpy.gatherSearch.model.vo.post.PostVO;
 import com.cpy.gatherSearch.service.service.PostService;
 import com.cpy.gatherSearch.service.service.UserService;
 import com.cpy.gatherSearch.utils.IsUser;
@@ -176,7 +175,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post>
      * @return
      */
     @Override
-    public List<Post> getPostListByEs(PostQueryRequest queryRequest) {
+    public List<PostVO> getPostListByEs(PostQueryRequest queryRequest) {
         String context = queryRequest.getContext();
         LinkedList<Post> postList = new LinkedList<>();
         if (!VerifyUtils.verifyString(context)) {
@@ -184,7 +183,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post>
             for (PostEsDTO postEsDTO : all) {
                 postList.add(BeanUtil.toBean(postEsDTO, Post.class));
             }
-            return postList;
+            return getPostVOs(postList);
         }
         MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(context, "content", "title");
         NativeSearchQuery build = new NativeSearchQueryBuilder().withQuery(multiMatchQueryBuilder).build();
@@ -194,7 +193,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post>
             Post post = BeanUtil.toBean(content, Post.class);
             postList.add(post);
         }
-        return postList;
+        return getPostVOs(postList);
     }
 
     /**
@@ -228,7 +227,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post>
     }
 
     @Override
-    public List<Post> getListByUserId(Long id) {
+    public List<PostVO> getListByUserId(Long id) {
         TermQueryBuilder termQb = QueryBuilders.termQuery("userId", id);
         NativeSearchQuery build = new NativeSearchQueryBuilder().withQuery(termQb).build();
         SearchHits<PostEsDTO> search = elasticsearchRestTemplate.search(build, PostEsDTO.class);
@@ -237,7 +236,20 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post>
             PostEsDTO content = postEsDTOSearchHit.getContent();
             posts.add(BeanUtil.toBean(content,Post.class));
         }
-        return posts;
+        List<PostVO> postVOs = getPostVOs(posts);
+        return postVOs;
+    }
+    public List<PostVO> getPostVOs(LinkedList<Post> posts) {
+        LinkedList<PostVO> postVOs = new LinkedList<>();
+        for (Post post : posts) {
+            Long userId = post.getUserId();
+            User byId = userService.getById(userId);
+            PostVO postVO = BeanUtil.toBean(post, PostVO.class);
+            postVO.setUserName(byId.getUserName());
+            postVO.setUserAvatar(byId.getUserAvatar());
+            postVOs.add(postVO);
+        }
+        return postVOs;
     }
 }
 

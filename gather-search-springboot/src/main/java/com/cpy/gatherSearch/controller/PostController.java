@@ -10,6 +10,10 @@ import com.cpy.gatherSearch.model.dto.post.PostQueryRequest;
 import com.cpy.gatherSearch.model.dto.post.PostUpdateRequest;
 import com.cpy.gatherSearch.model.entity.Post;
 import com.cpy.gatherSearch.model.entity.User;
+<<<<<<< HEAD
+=======
+import com.cpy.gatherSearch.model.vo.post.PostVO;
+>>>>>>> c29c9f8 (perfect)
 import com.cpy.gatherSearch.service.service.PostService;
 import com.cpy.gatherSearch.utils.IsUser;
 import com.cpy.gatherSearch.utils.ResultUtils;
@@ -78,7 +82,11 @@ public class PostController {
      * @return 帖子集合
      */
     @GetMapping(value = "/list/context")
+<<<<<<< HEAD
     public BaseResponse<List<Post>> query(PostQueryRequest queryRequest, HttpServletRequest request) {
+=======
+    public BaseResponse<List<PostVO>> query(PostQueryRequest queryRequest, HttpServletRequest request) {
+>>>>>>> c29c9f8 (perfect)
         //校验数据是否为空
         if (request == null) {
             throw new CommonException(StatuesCode.NULL_ERROR);
@@ -110,12 +118,20 @@ public class PostController {
         return ResultUtils.success(true);
     }
     @GetMapping("/getByUserId")
+<<<<<<< HEAD
     public BaseResponse<List<Post>> getByUserId(Long userId, HttpServletRequest request) {
+=======
+    public BaseResponse<List<PostVO>> getByUserId(Long userId, HttpServletRequest request) {
+>>>>>>> c29c9f8 (perfect)
         //校验数据是否为空
         if (userId == null || request == null||userId<1) {
             throw new CommonException(StatuesCode.NULL_ERROR, "请求数据为null");
         }
+<<<<<<< HEAD
         List<Post> listByUserId = postService.getListByUserId(userId);
+=======
+        List<PostVO> listByUserId = postService.getListByUserId(userId);
+>>>>>>> c29c9f8 (perfect)
         return ResultUtils.success(listByUserId);
     }
 }

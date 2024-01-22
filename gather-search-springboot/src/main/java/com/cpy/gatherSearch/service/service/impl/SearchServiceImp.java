@@ -8,6 +8,7 @@ import com.cpy.gatherSearch.model.entity.Picture;
 import com.cpy.gatherSearch.model.entity.Post;
 import com.cpy.gatherSearch.model.entity.Search;
 import com.cpy.gatherSearch.model.entity.User;
+import com.cpy.gatherSearch.model.vo.post.PostVO;
 import com.cpy.gatherSearch.service.service.PictureService;
 import com.cpy.gatherSearch.service.service.PostService;
 import com.cpy.gatherSearch.service.service.SearchService;
@@ -47,7 +48,7 @@ public class SearchServiceImp implements SearchService {
         List<User> userList = userService.getUserList(userQueryRequest);
         PostQueryRequest postQueryRequest = new PostQueryRequest();
         postQueryRequest.setContext(searchValue);
-        List<Post> postList = postService.getPostListByEs(postQueryRequest);
+        List<PostVO> postList = postService.getPostListByEs(postQueryRequest);
         PictureQueryRequest pictureQueryRequest = new PictureQueryRequest();
         pictureQueryRequest.setSearchValue(searchValue);
         List<Picture> pictureList = pictureService.getPictureList(searchValue);

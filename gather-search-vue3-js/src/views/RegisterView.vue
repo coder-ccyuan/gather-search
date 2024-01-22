@@ -12,7 +12,7 @@
       @finishFailed="onFinishFailed"
   >
     <a-form-item
-        label="账户"
+        label="设置账户"
         name="userAccount"
         :rules="[{ required: true, message: '请输入你的账户！' }]"
     >
@@ -24,7 +24,7 @@
     </a-form-item>
 
     <a-form-item
-        label="密码"
+        label="设置密码"
         name="userPassword"
         :rules="rules.userPassword"
     >
@@ -36,7 +36,7 @@
     </a-form-item>
 
     <a-form-item
-        label="重复密码"
+        label="确认密码"
         name="checkPassword"
         :rules="rules.checkPassword"
     >
@@ -98,6 +98,7 @@ const onFinish = () => {
     }else{
       console.log(res.description);
       message.error('注册失败',res.description)
+      alert('注册失败'+res.description)
     }
   }).catch(err=>{
     console.log(err);
